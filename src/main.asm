@@ -1,6 +1,8 @@
+;/////INCLUDES
 .include "constants.inc"
 .include "header.inc"
 
+;/////ZEROPAGE VARIABLES
 .segment "ZEROPAGE"
 pointer_x:          .res 1
 pointer_y:          .res 1
@@ -10,13 +12,14 @@ pad1:               .res 1
 
 .segment "CODE"
 
-
+;/////IMPORTS
 .import read_controller1    ;controllers.asm
 .import reset_handler       ;reset.asm
 .import draw_background     ;backgrounds.asm
 
+;/////VECTOR HANDLERS
 .proc irq_handler
-    RTI
+    RTI             ;intentionally doing nothing here
 .endproc
 
 .proc nmi_handler
@@ -37,6 +40,8 @@ pad1:               .res 1
 .endproc
 
 
-
 .segment "VECTORS"
 .addr nmi_handler, reset_handler, irq_handler
+
+.segment "CHR"
+.incbin "pointer.chr"
