@@ -9,11 +9,15 @@ pad1:               .res 1
 .exportzp pointer_x, pointer_y, pad1
 
 .segment "CODE"
+
+
+.import read_controller1    ;controllers.asm
+.import reset_handler       ;reset.asm
+.import draw_background     ;backgrounds.asm
+
 .proc irq_handler
     RTI
 .endproc
-
-.import read_controller1
 
 .proc nmi_handler
     LDA #$00        ;update sprite data
@@ -32,8 +36,7 @@ pad1:               .res 1
     RTI
 .endproc
 
-.import reset_handler
-.import draw_background ;TODO
+
 
 .segment "VECTORS"
 .addr nmi_handler, reset_handler, irq_handler

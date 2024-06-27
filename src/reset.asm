@@ -34,9 +34,9 @@ clear_oam:
 
 	; initialize zero-page values
 	LDA #$80
-	STA player_x
+	STA pointer_x
 	LDA #$a0
-	STA player_y
+	STA pointer_y
 
 vblankwait2:
   BIT $2002
